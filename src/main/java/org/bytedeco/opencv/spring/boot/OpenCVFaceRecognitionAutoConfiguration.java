@@ -17,7 +17,7 @@ import org.springframework.core.io.Resource;
 @EnableConfigurationProperties({ OpenCVFaceRecognitionProperties.class })
 public class OpenCVFaceRecognitionAutoConfiguration {
 	
-	@Value("classpath:haarcascade_frontalface_alt.xml")
+	@Value("classpath:haarcascades/haarcascade_frontalface_alt.xml")
 	private Resource classifier;
 	
     @Bean
@@ -35,7 +35,7 @@ public class OpenCVFaceRecognitionAutoConfiguration {
 	}
     
 	@Bean
-	public OpenCVFaceRecognitionTemplate faceRecognitionV3Template(CascadeClassifier faceDetector,
+	public OpenCVFaceRecognitionTemplate openCVFaceRecognitionTemplate(CascadeClassifier faceDetector,
 			OpenCVFaceRecognitionProperties properties) {
 		return new OpenCVFaceRecognitionTemplate(faceDetector, properties);
 	}
