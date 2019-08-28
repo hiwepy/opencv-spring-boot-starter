@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.bytedeco.javacpp.Loader;
+import org.bytedeco.opencv.opencv_java;
 import org.opencv.objdetect.CascadeClassifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,6 +22,11 @@ public class OpenCVFaceRecognitionAutoConfiguration {
 	@Value("classpath:haarcascades/haarcascade_frontalface_alt.xml")
 	private Resource classifier;
 	
+	static {
+		Loader.load(opencv_java.class);
+		//new opencv_java();
+	}
+	
     @Bean
     public CascadeClassifier faceDetector(OpenCVFaceRecognitionProperties properties) throws IOException {
     	// 创建临时文件，因为boot打包后无法读取文件内的内容
@@ -31,6 +38,7 @@ public class OpenCVFaceRecognitionAutoConfiguration {
     	}
 		File targetXmlFile = new File(tempDir, classifier.getFilename());
 		FileUtils.copyInputStreamToFile(classifier.getInputStream(), targetXmlFile);
+		//System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		return new CascadeClassifier(targetXmlFile.getPath());
 	}
     

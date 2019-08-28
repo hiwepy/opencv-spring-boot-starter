@@ -28,7 +28,6 @@ import org.bytedeco.opencv.global.opencv_imgproc;
 import org.bytedeco.opencv.helper.opencv_imgcodecs;
 import org.bytedeco.opencv.opencv_core.CvHistogram;
 import org.bytedeco.opencv.opencv_core.IplImage;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -53,7 +52,6 @@ public class OpenCVFaceRecognitionTemplate {
 	public OpenCVFaceRecognitionTemplate(CascadeClassifier faceDetector,
 			OpenCVFaceRecognitionProperties properties) {
 		this.faceDetector = faceDetector;
-		 System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
 
 	public void smooth(String path) {
