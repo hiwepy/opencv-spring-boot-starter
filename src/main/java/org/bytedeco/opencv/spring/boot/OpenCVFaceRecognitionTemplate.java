@@ -16,8 +16,13 @@
 package org.bytedeco.opencv.spring.boot;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.bytedeco.opencv.global.opencv_core;
 import org.bytedeco.opencv.global.opencv_imgproc;
 import org.bytedeco.opencv.helper.opencv_imgcodecs;
@@ -64,6 +69,23 @@ public class OpenCVFaceRecognitionTemplate {
 		return detect(new File(imagePath));
 	}
 	
+	public JSONObject detect(byte[] imageBytes, String filename) throws Exception {
+		// 创建临时文件，因为boot打包后无法读取文件内的内容
+    	File tempDir = new File(getProperties().getTemp());
+    	if(!tempDir.exists()) {
+    		tempDir.setReadable(true);
+    		tempDir.setWritable(true);
+    		tempDir.mkdir();
+    	}
+    	
+    	File imageFile = new File(tempDir, UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(filename));
+    	try (InputStream source = new ByteArrayInputStream(imageBytes);){
+    		FileUtils.copyInputStreamToFile(source, imageFile);
+    		return detect(imageFile);
+		}
+    	
+	}
+	
 	public JSONObject detect(File imageFile) {
 		
 		JSONObject result = new JSONObject();
@@ -99,6 +121,26 @@ public class OpenCVFaceRecognitionTemplate {
 	
 	public JSONObject match(String imagePath1, String imagePath2) {
 		return match(new File(imagePath1), new File(imagePath2));
+	}
+	
+	public JSONObject match(byte[] imageBytes1, byte[] imageBytes2, String filename) throws Exception {
+		// 创建临时文件，因为boot打包后无法读取文件内的内容
+    	File tempDir = new File(getProperties().getTemp());
+    	if(!tempDir.exists()) {
+    		tempDir.setReadable(true);
+    		tempDir.setWritable(true);
+    		tempDir.mkdir();
+    	}
+    	
+    	File imageFile1 = new File(tempDir, UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(filename));
+    	File imageFile2 = new File(tempDir, UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(filename));
+    	try (InputStream source1 = new ByteArrayInputStream(imageBytes1);
+    		 InputStream source2 = new ByteArrayInputStream(imageBytes2);){
+    		FileUtils.copyInputStreamToFile(source1, imageFile1);
+    		FileUtils.copyInputStreamToFile(source2, imageFile2);
+    		return match(imageFile1, imageFile2);
+		}
+    	
 	}
 	
 	public JSONObject match(File imageFile1, File imageFile2) {
