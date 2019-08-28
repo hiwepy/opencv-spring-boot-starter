@@ -43,8 +43,10 @@ public class OpenCVFaceRecognitionTemplate {
 
 	private static final Logger logger = LoggerFactory.getLogger(OpenCVFaceRecognitionTemplate.class);
 	private CascadeClassifier faceDetector;
+	private OpenCVFaceRecognitionProperties properties;
 	
-	public OpenCVFaceRecognitionTemplate(CascadeClassifier faceDetector) {
+	public OpenCVFaceRecognitionTemplate(CascadeClassifier faceDetector,
+			OpenCVFaceRecognitionProperties properties) {
 		this.faceDetector = faceDetector;
 		 System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 	}
@@ -148,6 +150,14 @@ public class OpenCVFaceRecognitionTemplate {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public CascadeClassifier getFaceDetector() {
+		return faceDetector;
+	}
+	
+	public OpenCVFaceRecognitionProperties getProperties() {
+		return properties;
 	}
 
 }
