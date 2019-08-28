@@ -35,9 +35,8 @@ public class OpenCVFaceRecognitionAutoConfiguration {
 	}
     
 	@Bean
-	public OpenCVFaceRecognitionTemplate faceRecognitionV3Template(CascadeClassifier faceDetector,
-			OpenCVFaceRecognitionProperties properties) {
-		return new OpenCVFaceRecognitionTemplate(faceDetector, properties);
+	public OpenCVFaceRecognitionTemplate faceRecognitionV3Template(CascadeClassifier faceDetector) {
+		return new OpenCVFaceRecognitionTemplate(faceDetector);
 	}
 	
 }

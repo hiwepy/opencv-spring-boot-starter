@@ -24,17 +24,9 @@ public class OpenCVFaceRecognitionProperties {
 	public static final String PREFIX = "opencv.face";
 
 	/**
-	 * 	Enable Baidu Face Recognition.
+	 * 	Enable OpenCV Face Recognition.
 	 */
 	private boolean enabled = false;
-	/**
-	 * 	官网获取的 API Key（百度云应用的AK）
-	 */
-	private String clientId;
-	/**
-	 * 	官网获取的 Secret Key（百度云应用的SK）
-	 */
-	private String clientSecret;
 	/**
 	 * 人脸识别图片临时目录
 	 */
@@ -46,22 +38,6 @@ public class OpenCVFaceRecognitionProperties {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
-	}
-
-	public String getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
-
-	public String getClientSecret() {
-		return clientSecret;
-	}
-
-	public void setClientSecret(String clientSecret) {
-		this.clientSecret = clientSecret;
 	}
 
 	public String getTemp() {
