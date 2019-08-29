@@ -52,6 +52,7 @@ public class OpenCVFaceRecognitionTemplate {
 	public OpenCVFaceRecognitionTemplate(CascadeClassifier faceDetector,
 			OpenCVFaceRecognitionProperties properties) {
 		this.faceDetector = faceDetector;
+		this.properties = properties;
 	}
 
 	public void smooth(String path) {

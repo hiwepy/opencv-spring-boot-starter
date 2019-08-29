@@ -384,8 +384,12 @@
 		<maven-surefire-plugin.vertsion>2.22.1</maven-surefire-plugin.vertsion>
 		<maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
 		<commons-io.version>2.6</commons-io.version>
+		<datavec.version>1.0.0-beta4</datavec.version>
+		<dl4j.version>1.0.0-beta4</dl4j.version>
+		<nd4j.version>1.0.0-beta4</nd4j.version>
 		<fastjson.version>1.2.57</fastjson.version>
-
+		<lombok.version>1.18.8</lombok.version>
+		
 		<javacv-platform.version>1.5.1</javacv-platform.version>
 		<ale-platform.version>0.6.0-1.5.1</ale-platform.version>
 		<arpack-ng-platform.version>3.7.0-1.5.1</arpack-ng-platform.version>
@@ -428,7 +432,7 @@
 		<numpy-platform.version>1.16.4-1.5.1</numpy-platform.version>
 		<videoinput-platform.version>0.200-1.5.1</videoinput-platform.version>
 		<platform.version>1.5.1</platform.version>
-
+		
 	</properties>
 
 	<dependencyManagement>
@@ -745,13 +749,49 @@
 				<artifactId>ffmpeg</artifactId>
 				<version>4.1-1.4.4</version>
 			</dependency>
-
-
+			
+			<!-- https://mvnrepository.com/artifact/org.deeplearning4j -->
+			<dependency>
+			    <groupId>org.deeplearning4j</groupId>
+			    <artifactId>deeplearning4j-core</artifactId>
+			    <version>${dl4j.version}</version>
+			</dependency>
+	        <dependency>
+	            <groupId>org.deeplearning4j</groupId>
+	            <artifactId>deeplearning4j-zoo</artifactId>
+	            <version>${dl4j.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.deeplearning4j</groupId>
+	            <artifactId>deeplearning4j-modelimport</artifactId>
+	            <version>${dl4j.version}</version>
+	        </dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-native-platform -->
+			<dependency>
+			    <groupId>org.nd4j</groupId>
+			    <artifactId>nd4j-native-platform</artifactId>
+			    <version>${nd4j.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.datavec/datavec-data-image -->
+			<dependency>
+			    <groupId>org.datavec</groupId>
+			    <artifactId>datavec-data-image</artifactId>
+			    <version>${datavec.version}</version>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-
+		
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        
 		<!-- Java Servlet API -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -812,6 +852,38 @@
 			<groupId>org.bytedeco</groupId>
 			<artifactId>opencv-platform</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.bytedeco/ffmpeg-platform -->
+		<!-- JavaCPP Presets Platform For NGraph -->
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>ffmpeg-platform</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.deeplearning4j -->
+		<dependency>
+		    <groupId>org.deeplearning4j</groupId>
+		    <artifactId>deeplearning4j-core</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-zoo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-modelimport</artifactId>
+        </dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-native-platform -->
+		<dependency>
+		    <groupId>org.nd4j</groupId>
+		    <artifactId>nd4j-native-platform</artifactId>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.datavec/datavec-data-image -->
+		<dependency>
+		    <groupId>org.datavec</groupId>
+		    <artifactId>datavec-data-image</artifactId>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>

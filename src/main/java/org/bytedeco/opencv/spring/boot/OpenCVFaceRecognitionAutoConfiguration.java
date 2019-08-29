@@ -6,6 +6,8 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.bytedeco.javacpp.Loader;
 import org.bytedeco.opencv.opencv_java;
+import org.bytedeco.opencv.spring.boot.dl4j.FaceNetSmallV2Model;
+import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.opencv.objdetect.CascadeClassifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -25,6 +27,24 @@ public class OpenCVFaceRecognitionAutoConfiguration {
 	static {
 		Loader.load(opencv_java.class);
 		//new opencv_java();
+		
+		
+        
+        
+	}
+	
+	@Bean
+	public FaceNetSmallV2Model faceNetSmallV2Model() {
+		return new FaceNetSmallV2Model();
+	}
+
+	@Bean
+	public ComputationGraph computationGraph(FaceNetSmallV2Model faceNetSmallV2Model) throws Exception {
+
+		ComputationGraph computationGraph = faceNetSmallV2Model.init();
+		System.out.println(computationGraph.summary());
+		
+		return computationGraph;
 	}
 	
     @Bean

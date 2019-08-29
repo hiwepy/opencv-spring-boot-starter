@@ -1,2 +1,2 @@
-opencv:  face:    enabled: true
+opencv:  dl4j:    minimize: false  face:    enabled: true
     temp: libs

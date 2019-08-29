@@ -1,9 +1,9 @@
-# spring-boot-starter-baiduapi
+# spring-boot-starter-opencv
 
 
 #### 组件简介
 
-> 基于 [百度智能云 - 人脸识别](https://cloud.baidu.com/product/face) 在线API实现的人脸识别整合
+> 基于 OpenCV, Dl4j, Facenet 实现的人脸识别整合
 
 
 #### 使用说明
@@ -13,7 +13,7 @@
 ``` xml
 <dependency>
 	<groupId>${project.groupId}</groupId>
-	<artifactId>spring-boot-starter-baiduapi</artifactId>
+	<artifactId>spring-boot-starter-opencv</artifactId>
 	<version>${project.version}</version>
 </dependency>
 ```
