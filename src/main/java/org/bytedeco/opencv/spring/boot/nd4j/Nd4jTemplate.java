@@ -20,24 +20,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.bytedeco.opencv.spring.boot.dl4j.FaceNetSmallV2Model;
-import org.bytedeco.opencv.spring.boot.image.ImageFactory;
-import org.bytedeco.opencv.spring.boot.image.ImageInfo;
+import org.bytedeco.opencv.spring.boot.nd4j.store.INDArrayStoreProvider;
 import org.datavec.image.loader.BaseImageLoader;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.nn.graph.vertex.GraphVertex;
 import org.deeplearning4j.nn.workspace.LayerWorkspaceMgr;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Optional;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
 
 /**
  * TODO
@@ -48,52 +40,33 @@ public class Nd4jTemplate {
 
     private static final double THRESHOLD = 0.57;
 	private FaceNetSmallV2Model faceNetSmallV2Model;
+	
     private ComputationGraph computationGraph;
 	private BaseImageLoader imageLoader;
+	private INDArrayStoreProvider storeProvider;
 	private int height;
 	private int width;
 	
-	/**
-	 * INDArray 对象比较消耗内存，为了提高效率和防止内存溢出，这里只允许存储1000个对象，且10分钟过期；
-	 */
-	private final LoadingCache<String, Optional<INDArray>> INDARRAY_CACHES = CacheBuilder.newBuilder()
-			// 设置并发级别为8，并发级别是指可以同时写缓存的线程数
-			.concurrencyLevel(8)
-			// 设置写缓存后600秒钟过期
-			.expireAfterWrite(29, TimeUnit.DAYS)
-			// 设置缓存容器的初始容量为10
-			.initialCapacity(2)
-			// 设置缓存最大容量为100，超过100之后就会按照LRU最近虽少使用算法来移除缓存项
-			.maximumSize(10)
-			// 设置要统计缓存的命中率
-			.recordStats()
-			// 设置缓存的移除通知
-			.removalListener(new RemovalListener<String, Optional<INDArray>>() {
-				@Override
-				public void onRemoval(RemovalNotification<String, Optional<INDArray>> notification) {
-					System.out.println(notification.getKey() + " was removed, cause is " + notification.getCause());
-				}
-			})
-			// build方法中可以指定CacheLoader，在缓存不存在时通过CacheLoader的实现自动加载缓存
-			.build(new CacheLoader<String, Optional<INDArray>>() {
-
-				@Override
-				public Optional<INDArray> load(String keySecret) throws Exception {
-					
-					
-					
-					JSONObject key = JSONObject.parseObject(keySecret);
-					String token = AuthClient.getAuth(key.getString("clientId"), key.getString("clientSecret"));
-					return Optional.fromNullable(token);
-				}
-			});
+	public Nd4jTemplate(ComputationGraph computationGraph, BaseImageLoader imageLoader, int height, int width) {
+		this.computationGraph = computationGraph;
+		this.imageLoader = imageLoader;
+		this.height = height;
+		this.width = width;
+	}
 	
-	
-    public void faceNew(String memberId, String imagePath) throws IOException {
-    	
-    	
-        INDArray read = read(imagePath);
-        memberEncodingsMap.put(memberId, forwardPass(normalize(read)));
+    public void faceNew(String group, String memberId, byte[] imageBytes) throws IOException {
+        INDArray read = asMatrix(imageBytes);
+        storeProvider.store(group, memberId, forwardPass(normalize(read)));
+    }
+    
+    public void faceNew(String group, String memberId, File imagePath) throws IOException {
+        INDArray read = asMatrix(imagePath);
+        storeProvider.store(group, memberId, forwardPass(normalize(read)));
+    }
+    
+    public void faceNew(String group, String memberId, String imagePath) throws IOException {
+    	 INDArray read = asMatrix(imagePath);
+    	 storeProvider.store(group, memberId, forwardPass(normalize(read)));
     }
 
     /**
@@ -108,8 +81,8 @@ public class Nd4jTemplate {
 
     public void match(byte[] imageBytes1, byte[] imageBytes2) throws IOException {
     	
-        INDArray r1 = read(imageBytes1);
-        INDArray r2 = read(imageBytes2);
+        INDArray r1 = asMatrix(imageBytes1);
+        INDArray r2 = asMatrix(imageBytes2);
 
         INDArray e1 = forwardPass(normalize(r1));
         INDArray e2 = forwardPass(normalize(r2));
@@ -123,20 +96,18 @@ public class Nd4jTemplate {
         }
     }
 
-    public String search(String imagePath) throws IOException {
-        INDArray read = read(imagePath);
+    public String search(String group, String memberId) throws IOException {
+        INDArray read = asMatrix(imagePath);
         INDArray encodings = forwardPass(normalize(read));
         double minDistance = Double.MAX_VALUE;
         String foundUser = "";
         
-        for (Map.Entry<String, INDArray> entry : memberEncodingsMap.entrySet()) {
-            INDArray value = entry.getValue();
-            double distance = Nd4jUtils.distance(value, encodings);
-            System.out.println("distance of " + entry.getKey() + " with " + new File(imagePath).getName() + " is " + distance);
-            if (distance < minDistance) {
-                minDistance = distance;
-                foundUser = entry.getKey();
-            }
+        INDArray value = storeProvider.get(group, memberId);
+        double distance = Nd4jUtils.distance(value, encodings);
+        System.out.println("distance of " + entry.getKey() + " with " + new File(imagePath).getName() + " is " + distance);
+        if (distance < minDistance) {
+            minDistance = distance;
+            foundUser = entry.getKey();
         }
         if (minDistance > THRESHOLD) {
             foundUser = "Unknown user";
@@ -145,18 +116,22 @@ public class Nd4jTemplate {
         return foundUser;
     }
 	
-	public INDArray read(byte[] imageBytes) throws IOException {
-		ImageInfo imageInfo = ImageFactory.getRGBData(imageBytes);
-		return read(new ByteArrayInputStream(imageInfo.getImageData()), imageInfo.getHeight(), imageInfo.getWidth());
+	public INDArray asMatrix(byte[] imageBytes) throws IOException {
+		return asMatrix(new ByteArrayInputStream(imageBytes));
 	}
 	
-	public INDArray read(InputStream inputStream, int height, int width) throws IOException {
-		INDArray indArray = imageLoader.asMatrix(inputStream);
+	public INDArray asMatrix(InputStream imageStream) throws IOException {
+		INDArray indArray = imageLoader.asMatrix(imageStream);
 		return Nd4jUtils.transpose(indArray, height, width);
 	}
+
+	public INDArray asMatrix(File imagePath) throws IOException {
+        INDArray indArray = imageLoader.asMatrix(imagePath);
+        return Nd4jUtils.transpose(indArray, height, width);
+    }
 	
-	public INDArray read(String pathname, int height, int width) throws IOException {
-        INDArray indArray = imageLoader.asMatrix(new File(pathname));
+	public INDArray asMatrix(String imagePath) throws IOException {
+        INDArray indArray = imageLoader.asMatrix(new File(imagePath));
         return Nd4jUtils.transpose(indArray, height, width);
     }
 	

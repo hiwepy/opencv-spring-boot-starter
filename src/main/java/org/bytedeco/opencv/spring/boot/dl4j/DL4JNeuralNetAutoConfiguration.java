@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.bytedeco.javacpp.Loader;
-import org.bytedeco.opencv.opencv_java;
 import org.bytedeco.opencv.spring.boot.OpenCVFaceRecognitionProperties;
 import org.bytedeco.opencv.spring.boot.OpenCVFaceRecognitionTemplate;
+import org.deeplearning4j.nn.api.OptimizationAlgorithm;
+import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
+import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.graph.ComputationGraph;
+import org.deeplearning4j.nn.weights.WeightInit;
+import org.nd4j.linalg.activations.Activation;
+import org.nd4j.linalg.learning.config.Sgd;
 import org.opencv.objdetect.CascadeClassifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,18 +44,16 @@ public class DL4JNeuralNetAutoConfiguration {
 	}
 	
     @Bean
-    public CascadeClassifier faceDetector(OpenCVFaceRecognitionProperties properties) throws IOException {
-    	// 创建临时文件，因为boot打包后无法读取文件内的内容
-    	File tempDir = new File(properties.getTemp());
-    	if(!tempDir.exists()) {
-    		tempDir.setReadable(true);
-    		tempDir.setWritable(true);
-    		tempDir.mkdir();
-    	}
-		File targetXmlFile = new File(tempDir, classifier.getFilename());
-		FileUtils.copyInputStreamToFile(classifier.getInputStream(), targetXmlFile);
-		//System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		return new CascadeClassifier(targetXmlFile.getPath());
+    public MultiLayerConfiguration multiLayerConfiguration(OpenCVFaceRecognitionProperties properties) throws IOException {
+		 MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
+		        .weightInit(WeightInit.XAVIER)
+		        .activation(Activation.RELU)
+		        .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
+		        .updater(new Sgd(0.05))
+		        // ... other hyperparameters
+		        .list()
+		        .build();
+		return conf;
 	}
     
 	@Bean

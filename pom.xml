@@ -730,25 +730,6 @@
 				<artifactId>videoinput-platform</artifactId>
 				<version>${videoinput-platform.version}</version>
 			</dependency>
-
-			<!-- https://mvnrepository.com/artifact/org.bytedeco.javacpp-presets/opencv -->
-			<dependency>
-				<groupId>org.bytedeco.javacpp-presets</groupId>
-				<artifactId>opencv</artifactId>
-				<version>4.0.1-1.4.4</version>
-			</dependency>
-			<!-- https://mvnrepository.com/artifact/org.bytedeco.javacpp-presets/openblas -->
-			<dependency>
-				<groupId>org.bytedeco.javacpp-presets</groupId>
-				<artifactId>openblas</artifactId>
-				<version>0.3.5-1.4.4</version>
-			</dependency>
-			<!-- https://mvnrepository.com/artifact/org.bytedeco.javacpp-presets/ffmpeg -->
-			<dependency>
-				<groupId>org.bytedeco.javacpp-presets</groupId>
-				<artifactId>ffmpeg</artifactId>
-				<version>4.1-1.4.4</version>
-			</dependency>
 			
 			<!-- https://mvnrepository.com/artifact/org.deeplearning4j -->
 			<dependency>

@@ -26,6 +26,7 @@ import org.nd4j.linalg.indexing.NDArrayIndex;
 public class Nd4jUtils {
 	
 	public static INDArray transpose(INDArray indArray1, int height, int width) {
+		// 创建一个简单的2×2矩阵，用整数填充它，并将其放置在ND数组变量
         INDArray one = Nd4j.create(new int[]{1, height, width});
         one.assign(indArray1.get(NDArrayIndex.point(0), NDArrayIndex.point(2)));
         INDArray two = Nd4j.create(new int[]{1, height, width});
