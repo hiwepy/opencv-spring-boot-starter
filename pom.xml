@@ -387,7 +387,7 @@
 		<datavec.version>1.0.0-beta4</datavec.version>
 		<dl4j.version>1.0.0-beta4</dl4j.version>
 		<nd4j.version>1.0.0-beta4</nd4j.version>
-		<fastjson.version>1.2.57</fastjson.version>
+		<fastjson.version>1.2.61</fastjson.version>
 		<lombok.version>1.18.8</lombok.version>
 		
 		<javacv-platform.version>1.5.1</javacv-platform.version>
