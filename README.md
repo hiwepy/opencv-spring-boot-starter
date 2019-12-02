@@ -1,4 +1,4 @@
-# spring-boot-starter-opencv
+# opencv-spring-boot-starter
 
 
 #### 组件简介
