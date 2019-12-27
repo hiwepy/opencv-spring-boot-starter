@@ -97,7 +97,7 @@ public class Nd4jTemplate {
     }
 
     public String search(String group, String memberId) throws IOException {
-        INDArray read = asMatrix(imagePath);
+        /*INDArray read = asMatrix(imagePath);
         INDArray encodings = forwardPass(normalize(read));
         double minDistance = Double.MAX_VALUE;
         String foundUser = "";
@@ -113,7 +113,8 @@ public class Nd4jTemplate {
             foundUser = "Unknown user";
         }
         System.out.println(foundUser + " with distance " + minDistance);
-        return foundUser;
+        return foundUser;*/
+    	return "";
     }
 	
 	public INDArray asMatrix(byte[] imageBytes) throws IOException {
