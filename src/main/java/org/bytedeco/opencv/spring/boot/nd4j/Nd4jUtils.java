@@ -21,7 +21,7 @@ import org.nd4j.linalg.indexing.NDArrayIndex;
 
 /**
  * TODO
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class Nd4jUtils {
 	

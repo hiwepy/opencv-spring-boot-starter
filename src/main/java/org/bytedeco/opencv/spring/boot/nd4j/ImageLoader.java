@@ -16,7 +16,7 @@
 package org.bytedeco.opencv.spring.boot.nd4j;
 
 /**
- * @author ： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public enum ImageLoader {
 	
