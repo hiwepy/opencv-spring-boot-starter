@@ -17,7 +17,7 @@ package org.bytedeco.opencv.spring.boot;
 
 /**
  * TODO
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 
 public class Test {
