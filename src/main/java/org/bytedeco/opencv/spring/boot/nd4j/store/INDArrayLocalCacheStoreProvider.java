@@ -71,7 +71,7 @@ public class INDArrayLocalCacheStoreProvider implements INDArrayStoreProvider {
 	@Override
 	public INDArray get(String group, String memberId) {
 		Optional<INDArray> ndarray = INDARRAY_CACHES.getIfPresent(String.join("-", group, memberId));
-		return ndarray.isPresent() ? ndarray.get() : null;
+		return (ndarray != null && ndarray.isPresent()) ? ndarray.get() : null;
 	}
 	
 }
