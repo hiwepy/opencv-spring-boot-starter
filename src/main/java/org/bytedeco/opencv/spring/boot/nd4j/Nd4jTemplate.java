@@ -33,7 +33,7 @@ import com.google.common.base.Optional;
 
 /**
  * TODO
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 
 public class Nd4jTemplate {
@@ -71,7 +71,7 @@ public class Nd4jTemplate {
 
     /**
      * 标准化
-     * @author [@Loong Wan](https://github.com/loong10k)
+     * @author <a href="https://github.com/loong10k">Loong Wan</a>
      * @param read
      * @return
      */
