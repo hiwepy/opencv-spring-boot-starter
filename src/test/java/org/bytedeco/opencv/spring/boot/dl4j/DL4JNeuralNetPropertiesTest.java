@@ -7,7 +7,7 @@ import org.nd4j.linalg.api.buffer.DataType;
 
 /**
  * Tests for {@link DL4JNeuralNetProperties}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class DL4JNeuralNetPropertiesTest {
 

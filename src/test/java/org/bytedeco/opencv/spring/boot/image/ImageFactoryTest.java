@@ -14,7 +14,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Tests for {@link ImageFactory}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class ImageFactoryTest {
 

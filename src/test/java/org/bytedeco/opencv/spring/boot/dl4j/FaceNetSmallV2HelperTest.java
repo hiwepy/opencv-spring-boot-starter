@@ -23,7 +23,7 @@ import org.nd4j.linalg.learning.config.Adam;
 
 /**
  * Tests for {@link FaceNetSmallV2Helper}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class FaceNetSmallV2HelperTest {
 

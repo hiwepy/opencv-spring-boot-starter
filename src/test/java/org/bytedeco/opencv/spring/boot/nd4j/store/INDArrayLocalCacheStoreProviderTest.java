@@ -8,7 +8,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 /**
  * Tests for {@link INDArrayLocalCacheStoreProvider}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class INDArrayLocalCacheStoreProviderTest {
 

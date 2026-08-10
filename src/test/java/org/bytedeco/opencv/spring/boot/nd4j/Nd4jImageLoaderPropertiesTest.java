@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Nd4jImageLoaderProperties}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class Nd4jImageLoaderPropertiesTest {
 

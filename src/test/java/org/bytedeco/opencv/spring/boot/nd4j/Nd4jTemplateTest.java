@@ -17,7 +17,7 @@ import org.bytedeco.opencv.spring.boot.dl4j.FaceNetSmallV2Model;
 
 /**
  * Tests for {@link Nd4jTemplate}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class Nd4jTemplateTest {
 

@@ -10,7 +10,7 @@ import org.nd4j.linalg.indexing.NDArrayIndex;
 
 /**
  * Tests for {@link Nd4jUtils}.
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class Nd4jUtilsTest {
 
