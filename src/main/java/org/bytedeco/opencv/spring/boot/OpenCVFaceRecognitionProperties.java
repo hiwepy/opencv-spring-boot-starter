@@ -19,6 +19,12 @@ import org.apache.commons.lang3.SystemUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(OpenCVFaceRecognitionProperties.PREFIX)
+/**
+ * <p>Configuration properties for Open C V Face Recognition.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class OpenCVFaceRecognitionProperties {
 
 	public static final String PREFIX = "opencv.face";
@@ -31,18 +37,25 @@ public class OpenCVFaceRecognitionProperties {
 	 * 人脸识别图片临时目录
 	 */
 	private String temp = SystemUtils.getUserDir().getAbsolutePath();
+	/**
+	 * <p>Is enabled.</p>
+	 * @return the boolean
+	 */
 	
 	public boolean isEnabled() {
 		return enabled;
 	}
+	/** Sets the enabled. */
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	/** Gets the temp. */
 
 	public String getTemp() {
 		return temp;
 	}
+	/** Sets the temp. */
 
 	public void setTemp(String temp) {
 		this.temp = temp;

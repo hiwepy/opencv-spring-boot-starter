@@ -37,6 +37,8 @@ import org.nd4j.linalg.learning.config.IUpdater;
  * <p>
  * Inspired by keras implementation
  * https://github.com/iwantooxxoox/Keras-OpenFace
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class FaceNetSmallV2Model {
 
@@ -47,6 +49,10 @@ public class FaceNetSmallV2Model {
 	private int encodings = 128;
 	public static int reluIndex = 1;
 	public static int paddingIndex = 1;
+	/**
+	 * <p>Conf.</p>
+	 * @return the computation graph configuration
+	 */
 
 	public ComputationGraphConfiguration conf() {
 
@@ -110,6 +116,10 @@ public class FaceNetSmallV2Model {
 
 		return graph.build();
 	}
+	/**
+	 * <p>Build block3a.</p>
+	 * @param graph the graph
+	 */
 
 	private void buildBlock3a(ComputationGraphConfiguration.GraphBuilder graph) {
 		graph.addLayer("inception_3a_3x3_conv1", convolution(1, 192, 96), "pool2")
@@ -144,6 +154,10 @@ public class FaceNetSmallV2Model {
 				.addVertex("inception_3a", new MergeVertex(), "relu5", "relu7", lastPaddingId(), "relu9");
 
 	}
+	/**
+	 * <p>Build block3b.</p>
+	 * @param graph the graph
+	 */
 
 	private void buildBlock3b(ComputationGraphConfiguration.GraphBuilder graph) {
 		graph.addLayer("inception_3b_3x3_conv1", convolution(1, 256, 96), "inception_3a")
@@ -189,6 +203,10 @@ public class FaceNetSmallV2Model {
 				.addVertex("inception_3b", new MergeVertex(), "relu11", "relu13", lastPaddingId(), "relu15");
 
 	}
+	/**
+	 * <p>Build block3c.</p>
+	 * @param graph the graph
+	 */
 
 	private void buildBlock3c(ComputationGraphConfiguration.GraphBuilder graph) {
 		convolution2dAndBN(graph, "inception_3c_3x3", 128, 320, new int[] { 1, 1 }, new int[] { 1, 1 }, 256, 128,
@@ -209,6 +227,10 @@ public class FaceNetSmallV2Model {
 
 		graph.addVertex("inception_3c", new MergeVertex(), rel1, rel2, pad1);
 	}
+	/**
+	 * <p>Build block4a.</p>
+	 * @param graph the graph
+	 */
 
 	private void buildBlock4a(ComputationGraphConfiguration.GraphBuilder graph) {
 		convolution2dAndBN(graph, "inception_4a_3x3", 96, 640, new int[] { 1, 1 }, new int[] { 1, 1 }, 192, 96,
@@ -233,6 +255,10 @@ public class FaceNetSmallV2Model {
 		graph.addVertex("inception_4a", new MergeVertex(), rel1, rel2, rel4, pad1);
 
 	}
+	/**
+	 * <p>Build block4e.</p>
+	 * @param graph the graph
+	 */
 
 	private void buildBlock4e(ComputationGraphConfiguration.GraphBuilder graph) {
 		convolution2dAndBN(graph, "inception_4e_3x3", 160, 640, new int[] { 1, 1 }, new int[] { 1, 1 }, 256, 160,
@@ -252,6 +278,10 @@ public class FaceNetSmallV2Model {
 
 		graph.addVertex("inception_4e", new MergeVertex(), rel1, rel2, pad1);
 	}
+	/**
+	 * <p>Build block5a.</p>
+	 * @param graph the graph
+	 */
 
 	private void buildBlock5a(ComputationGraphConfiguration.GraphBuilder graph) {
 		convolution2dAndBN(graph, "inception_5a_3x3", 96, 1024, new int[] { 1, 1 }, new int[] { 1, 1 }, 384, 96,
@@ -272,6 +302,10 @@ public class FaceNetSmallV2Model {
 
 		graph.addVertex("inception_5a", new MergeVertex(), relu1, pad1, rel3);
 	}
+	/**
+	 * <p>Build block5b.</p>
+	 * @param graph the graph
+	 */
 
 	private void buildBlock5b(ComputationGraphConfiguration.GraphBuilder graph) {
 		convolution2dAndBN(graph, "inception_5b_3x3", 96, 736, new int[] { 1, 1 }, new int[] { 1, 1 }, 384, 96,
@@ -293,6 +327,11 @@ public class FaceNetSmallV2Model {
 
 		graph.addVertex("inception_5b", new MergeVertex(), rel1, pad1, rel2);
 	}
+	/**
+	 * <p>Init.</p>
+	 * @return the computation graph
+	 * @throws IOException if an error occurs
+	 */
 
 	public ComputationGraph init() throws IOException {
 		resetIndexes();
@@ -301,6 +340,10 @@ public class FaceNetSmallV2Model {
 		loadWeights(computationGraph);
 		return computationGraph;
 	}
+	/**
+	 * <p>Reset indexes.</p>
+	 * @return the static void
+	 */
 
 	private static void resetIndexes() {
 		reluIndex = 1;

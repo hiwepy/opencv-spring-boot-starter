@@ -18,6 +18,12 @@ import org.springframework.util.StringUtils;
 @ConditionalOnProperty(prefix = Nd4jProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ Nd4jProperties.class, Nd4jImageLoaderProperties.class, Nd4jCifarLoaderProperties.class,
 		Nd4jLFWLoaderProperties.class, Nd4NativeLoaderProperties.class })
+/**
+ * <p>Auto-configuration for Nd4j integration.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class Nd4jAutoConfiguration {
 
 	@Bean
@@ -51,6 +57,12 @@ public class Nd4jAutoConfiguration {
 		}
 		return imageLoader;
 	}
+	/**
+	 * <p>Nd4j template.</p>
+	 * @param computationGraph the computation graph
+	 * @param imageLoader the image loader
+	 * @return the nd4j template
+	 */
 	
 	@Bean
 	public Nd4jTemplate Nd4jTemplate(ComputationGraph computationGraph, BaseImageLoader imageLoader) {

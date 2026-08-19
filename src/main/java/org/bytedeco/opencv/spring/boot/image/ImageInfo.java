@@ -18,6 +18,12 @@ package org.bytedeco.opencv.spring.boot.image;
 import lombok.Data;
 
 @Data
+/**
+ * <p>Image Info.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class ImageInfo {
 	
 	private byte[] imageData;

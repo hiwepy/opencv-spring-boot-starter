@@ -21,6 +21,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
  * TODO
  * 
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public interface INDArrayStoreProvider {
 

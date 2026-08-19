@@ -23,6 +23,12 @@ import lombok.Setter;
 @ConfigurationProperties(Nd4jImageLoaderProperties.PREFIX)
 @Getter
 @Setter
+/**
+ * <p>Configuration properties for Nd4j Image Loader.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class Nd4jImageLoaderProperties {
 
 	public static final String PREFIX = "opencv.nd4j.loader.default";

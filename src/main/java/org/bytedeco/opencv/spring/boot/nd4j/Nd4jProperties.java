@@ -29,6 +29,12 @@ import lombok.Setter;
 @ConfigurationProperties(Nd4jProperties.PREFIX)
 @Getter
 @Setter
+/**
+ * <p>Configuration properties for Nd4j.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class Nd4jProperties {
 
 	public static final String PREFIX = "opencv.nd4j";

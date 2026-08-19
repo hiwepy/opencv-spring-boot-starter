@@ -29,6 +29,12 @@ import lombok.Setter;
 @ConfigurationProperties(DL4JNeuralNetProperties.PREFIX)
 @Getter
 @Setter
+/**
+ * <p>Configuration properties for D L4 J Neural Net.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DL4JNeuralNetProperties {
 
 	public static final String PREFIX = "opencv.dl4j";

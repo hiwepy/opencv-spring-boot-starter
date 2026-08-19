@@ -34,6 +34,7 @@ import com.google.common.base.Optional;
 /**
  * TODO
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 
 public class Nd4jTemplate {
@@ -53,16 +54,37 @@ public class Nd4jTemplate {
 		this.height = height;
 		this.width = width;
 	}
+    /**
+     * <p>Face new.</p>
+     * @param group the group
+     * @param memberId the member id
+     * @param imageBytes the image bytes
+     * @throws IOException if an error occurs
+     */
 	
     public void faceNew(String group, String memberId, byte[] imageBytes) throws IOException {
         INDArray read = asMatrix(imageBytes);
         storeProvider.store(group, memberId, forwardPass(normalize(read)));
     }
+    /**
+     * <p>Face new.</p>
+     * @param group the group
+     * @param memberId the member id
+     * @param imagePath the image path
+     * @throws IOException if an error occurs
+     */
     
     public void faceNew(String group, String memberId, File imagePath) throws IOException {
         INDArray read = asMatrix(imagePath);
         storeProvider.store(group, memberId, forwardPass(normalize(read)));
     }
+    /**
+     * <p>Face new.</p>
+     * @param group the group
+     * @param memberId the member id
+     * @param imagePath the image path
+     * @throws IOException if an error occurs
+     */
     
     public void faceNew(String group, String memberId, String imagePath) throws IOException {
     	 INDArray read = asMatrix(imagePath);
@@ -78,6 +100,12 @@ public class Nd4jTemplate {
     private static INDArray normalize(INDArray read) {
         return read.div(255.0);
     }
+    /**
+     * <p>Match.</p>
+     * @param imageBytes1 the image bytes1
+     * @param imageBytes2 the image bytes2
+     * @throws IOException if an error occurs
+     */
 
     public void match(byte[] imageBytes1, byte[] imageBytes2) throws IOException {
     	
@@ -95,6 +123,13 @@ public class Nd4jTemplate {
             System.out.println("dismatch");
         }
     }
+    /**
+     * <p>Search.</p>
+     * @param group the group
+     * @param memberId the member id
+     * @return the string
+     * @throws IOException if an error occurs
+     */
 
     public String search(String group, String memberId) throws IOException {
         /*INDArray read = asMatrix(imagePath);
@@ -116,25 +151,54 @@ public class Nd4jTemplate {
         return foundUser;*/
     	return "";
     }
+	/**
+	 * <p>As matrix.</p>
+	 * @param imageBytes the image bytes
+	 * @return the i n d array
+	 * @throws IOException if an error occurs
+	 */
 	
 	public INDArray asMatrix(byte[] imageBytes) throws IOException {
 		return asMatrix(new ByteArrayInputStream(imageBytes));
 	}
+	/**
+	 * <p>As matrix.</p>
+	 * @param imageStream the image stream
+	 * @return the i n d array
+	 * @throws IOException if an error occurs
+	 */
 	
 	public INDArray asMatrix(InputStream imageStream) throws IOException {
 		INDArray indArray = imageLoader.asMatrix(imageStream);
 		return Nd4jUtils.transpose(indArray, height, width);
 	}
+	/**
+	 * <p>As matrix.</p>
+	 * @param imagePath the image path
+	 * @return the i n d array
+	 * @throws IOException if an error occurs
+	 */
 
 	public INDArray asMatrix(File imagePath) throws IOException {
         INDArray indArray = imageLoader.asMatrix(imagePath);
         return Nd4jUtils.transpose(indArray, height, width);
     }
+	/**
+	 * <p>As matrix.</p>
+	 * @param imagePath the image path
+	 * @return the i n d array
+	 * @throws IOException if an error occurs
+	 */
 	
 	public INDArray asMatrix(String imagePath) throws IOException {
         INDArray indArray = imageLoader.asMatrix(new File(imagePath));
         return Nd4jUtils.transpose(indArray, height, width);
     }
+    /**
+     * <p>Forward pass.</p>
+     * @param indArray the ind array
+     * @return the i n d array
+     */
 	
     private INDArray forwardPass(INDArray indArray) {
     	

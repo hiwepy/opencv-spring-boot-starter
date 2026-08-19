@@ -19,6 +19,12 @@ import org.springframework.core.io.Resource;
 @Configuration
 @ConditionalOnProperty(prefix = OpenCVFaceRecognitionProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ OpenCVFaceRecognitionProperties.class })
+/**
+ * <p>Auto-configuration for Open C V Face Recognition integration.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class OpenCVFaceRecognitionAutoConfiguration {
 	
 	@Value("classpath:haarcascades/haarcascade_frontalface_alt.xml")
@@ -29,14 +35,22 @@ public class OpenCVFaceRecognitionAutoConfiguration {
 		//new opencv_java();
 		
 		
-        
-        
 	}
+	/**
+	 * <p>Face net small v2 model.</p>
+	 * @return the face net small v2 model
+	 */
 	
 	@Bean
 	public FaceNetSmallV2Model faceNetSmallV2Model() {
 		return new FaceNetSmallV2Model();
 	}
+	/**
+	 * <p>Computation graph.</p>
+	 * @param faceNetSmallV2Model the face net small v2 model
+	 * @return the computation graph
+	 * @throws Exception if an error occurs
+	 */
 
 	@Bean
 	public ComputationGraph computationGraph(FaceNetSmallV2Model faceNetSmallV2Model) throws Exception {
@@ -46,6 +60,12 @@ public class OpenCVFaceRecognitionAutoConfiguration {
 		
 		return computationGraph;
 	}
+    /**
+     * <p>Face detector.</p>
+     * @param properties the properties
+     * @return the cascade classifier
+     * @throws IOException if an error occurs
+     */
 	
     @Bean
     public CascadeClassifier faceDetector(OpenCVFaceRecognitionProperties properties) throws IOException {

@@ -27,7 +27,14 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 
+/**
+ * <p>Factory for creating image factory instances.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class ImageFactory {
+    /** Gets the r g b data. */
 
 
     public static ImageInfo getRGBData(File file) {
@@ -44,6 +51,7 @@ public class ImageFactory {
         }
         return imageInfo;
     }
+    /** Gets the gray data. */
 
     public static ImageInfo getGrayData(File file) {
         if (file == null)
@@ -59,18 +67,21 @@ public class ImageFactory {
         }
         return imageInfo;
     }
+    /** Gets the r g b data. */
 
     public static ImageInfo getRGBData(byte[] bytes) {
         if (bytes == null)
             return null;
         return getRGBData(new ByteArrayInputStream(bytes));
     }
+    /** Gets the gray data. */
 
     public static ImageInfo getGrayData(byte[] bytes) {
         if (bytes == null)
             return null;
         return getGrayData(new ByteArrayInputStream(bytes));
     }
+    /** Gets the r g b data. */
 
 
     public static ImageInfo getRGBData(InputStream input) {
@@ -95,6 +106,7 @@ public class ImageFactory {
         }
         return imageInfo;
     }
+    /** Gets the gray data. */
 
     public static ImageInfo getGrayData(InputStream input) {
         if (input == null)
@@ -118,6 +130,11 @@ public class ImageFactory {
         }
         return imageInfo;
     }
+    /**
+     * <p>Buffered image2 image info.</p>
+     * @param image the image
+     * @return the static  image info
+     */
 
 
     public static ImageInfo bufferedImage2ImageInfo(BufferedImage image) {
@@ -149,6 +166,11 @@ public class ImageFactory {
         imageInfo.setImageData(((DataBufferByte) (dstImage.getRaster().getDataBuffer())).getData());
         return imageInfo;
     }
+    /**
+     * <p>Buffered image2 gray image info.</p>
+     * @param image the image
+     * @return the static  image info
+     */
 
     public static ImageInfo bufferedImage2GrayImageInfo(BufferedImage image) {
         ImageInfo imageInfo = new ImageInfo();
@@ -166,6 +188,13 @@ public class ImageFactory {
         imageInfo.setImageData(bytes);
         return imageInfo;
     }
+    /**
+     * <p>Rgb to gray.</p>
+     * @param argb the argb
+     * @param width the width
+     * @param height the height
+     * @return the static byte[]
+     */
 
 
     private static byte[] rgbToGray(int[] argb, int width, int height) {

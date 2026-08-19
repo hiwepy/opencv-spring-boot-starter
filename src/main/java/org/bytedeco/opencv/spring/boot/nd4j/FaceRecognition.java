@@ -20,6 +20,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+/**
+ * <p>Face Recognition.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class FaceRecognition {
 
     private static final NativeImageLoader LOADER = new NativeImageLoader(96, 96, 3);
@@ -27,5 +33,4 @@ public class FaceRecognition {
     private final HashMap<String, INDArray> memberEncodingsMap = new HashMap<>();
 
     
-
 }

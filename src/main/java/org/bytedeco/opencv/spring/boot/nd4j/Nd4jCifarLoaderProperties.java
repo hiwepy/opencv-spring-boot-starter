@@ -23,6 +23,12 @@ import lombok.Setter;
 @ConfigurationProperties(Nd4jCifarLoaderProperties.PREFIX)
 @Getter
 @Setter
+/**
+ * <p>Configuration properties for Nd4j Cifar Loader.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class Nd4jCifarLoaderProperties {
 
 	public static final String PREFIX = "opencv.nd4j.loader.cifar";

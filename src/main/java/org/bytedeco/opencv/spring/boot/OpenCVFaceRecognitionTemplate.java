@@ -42,6 +42,7 @@ import com.alibaba.fastjson2.JSONObject;
 /**
  * TODO
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class OpenCVFaceRecognitionTemplate {
 
@@ -54,6 +55,10 @@ public class OpenCVFaceRecognitionTemplate {
 		this.faceDetector = faceDetector;
 		this.properties = properties;
 	}
+	/**
+	 * <p>Smooth.</p>
+	 * @param path the path
+	 */
 
 	public void smooth(String path) {
         IplImage image = opencv_imgcodecs.cvLoadImage(path);
@@ -63,10 +68,22 @@ public class OpenCVFaceRecognitionTemplate {
         	opencv_core.cvReleaseImage(image);
         }
     }
+	/**
+	 * <p>Detect.</p>
+	 * @param imagePath the image path
+	 * @return the j s o n object
+	 */
 	
 	public JSONObject detect(String imagePath) {
 		return detect(new File(imagePath));
 	}
+	/**
+	 * <p>Detect.</p>
+	 * @param imageBytes the image bytes
+	 * @param filename the filename
+	 * @return the j s o n object
+	 * @throws Exception if an error occurs
+	 */
 	
 	public JSONObject detect(byte[] imageBytes, String filename) throws Exception {
 		// 创建临时文件，因为boot打包后无法读取文件内的内容
@@ -84,6 +101,11 @@ public class OpenCVFaceRecognitionTemplate {
 		}
     	
 	}
+	/**
+	 * <p>Detect.</p>
+	 * @param imageFile the image file
+	 * @return the j s o n object
+	 */
 	
 	public JSONObject detect(File imageFile) {
 		
@@ -117,10 +139,24 @@ public class OpenCVFaceRecognitionTemplate {
 		}
 		return result;
 	}
+	/**
+	 * <p>Match.</p>
+	 * @param imagePath1 the image path1
+	 * @param imagePath2 the image path2
+	 * @return the j s o n object
+	 */
 	
 	public JSONObject match(String imagePath1, String imagePath2) {
 		return match(new File(imagePath1), new File(imagePath2));
 	}
+	/**
+	 * <p>Match.</p>
+	 * @param imageBytes1 the image bytes1
+	 * @param imageBytes2 the image bytes2
+	 * @param filename the filename
+	 * @return the j s o n object
+	 * @throws Exception if an error occurs
+	 */
 	
 	public JSONObject match(byte[] imageBytes1, byte[] imageBytes2, String filename) throws Exception {
 		// 创建临时文件，因为boot打包后无法读取文件内的内容
@@ -141,6 +177,12 @@ public class OpenCVFaceRecognitionTemplate {
 		}
     	
 	}
+	/**
+	 * <p>Match.</p>
+	 * @param imageFile1 the image file1
+	 * @param imageFile2 the image file2
+	 * @return the j s o n object
+	 */
 	
 	public JSONObject match(File imageFile1, File imageFile2) {
 		
@@ -192,10 +234,12 @@ public class OpenCVFaceRecognitionTemplate {
 		}
 		return result;
 	}
+	/** Gets the face detector. */
 	
 	public CascadeClassifier getFaceDetector() {
 		return faceDetector;
 	}
+	/** Gets the properties. */
 	
 	public OpenCVFaceRecognitionProperties getProperties() {
 		return properties;

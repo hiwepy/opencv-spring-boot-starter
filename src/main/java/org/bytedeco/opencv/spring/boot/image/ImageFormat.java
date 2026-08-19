@@ -18,6 +18,8 @@ package org.bytedeco.opencv.spring.boot.image;
 
 /**
  * 图像格式
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public enum ImageFormat {
     /**
@@ -56,6 +58,7 @@ public enum ImageFormat {
     ImageFormat(int value) {
         this.value = value;
     }
+    /** Gets the value. */
 
     public int getValue() {
         return value;

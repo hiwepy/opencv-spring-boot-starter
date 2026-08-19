@@ -20,6 +20,12 @@ import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
+/**
+ * <p>Face Net Small V2 Helper.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class FaceNetSmallV2Helper {
     static final String BASE = "D:\\workspaces\\workspace-jeebiz\\workspace-jeebiz-projects\\workspace-jeebiz-opencv\\FaceRecognition\\src\\main\\resources\\face\\";
 
@@ -141,6 +147,11 @@ public class FaceNetSmallV2Helper {
             }
         }
     }
+    /**
+     * <p>Merge all.</p>
+     * @param all the all
+     * @return the static  i n d array
+     */
 
     private static INDArray mergeAll(List<double[]> all) {
         INDArray[] allArr = new INDArray[all.size()];

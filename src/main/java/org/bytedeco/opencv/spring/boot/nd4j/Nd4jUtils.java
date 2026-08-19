@@ -22,8 +22,16 @@ import org.nd4j.linalg.indexing.NDArrayIndex;
 /**
  * TODO
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class Nd4jUtils {
+	/**
+	 * <p>Transpose.</p>
+	 * @param indArray1 the ind array1
+	 * @param height the height
+	 * @param width the width
+	 * @return the static  i n d array
+	 */
 	
 	public static INDArray transpose(INDArray indArray1, int height, int width) {
 		// 创建一个简单的2×2矩阵，用整数填充它，并将其放置在ND数组变量
@@ -35,6 +43,12 @@ public class Nd4jUtils {
         three.assign(indArray1.get(NDArrayIndex.point(0), NDArrayIndex.point(0)));
         return Nd4j.concat(0, one, two, three).reshape(new int[]{1, 3, height, width});
     }
+	/**
+	 * <p>Distance.</p>
+	 * @param a the a
+	 * @param b the b
+	 * @return the static double
+	 */
 	
 	public static double distance(INDArray a, INDArray b) {
         return a.distance2(b);

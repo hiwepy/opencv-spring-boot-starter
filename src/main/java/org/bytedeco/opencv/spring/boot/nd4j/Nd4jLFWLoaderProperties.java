@@ -24,6 +24,12 @@ import lombok.Setter;
 @ConfigurationProperties(Nd4jLFWLoaderProperties.PREFIX)
 @Getter
 @Setter
+/**
+ * <p>Configuration properties for Nd4j L F W Loader.</p>
+ *
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class Nd4jLFWLoaderProperties {
 
 	public static final String PREFIX = "opencv.nd4j.loader.lfw";

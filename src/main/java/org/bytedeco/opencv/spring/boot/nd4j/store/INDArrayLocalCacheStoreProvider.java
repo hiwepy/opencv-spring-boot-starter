@@ -29,6 +29,7 @@ import com.google.common.cache.RemovalNotification;
 /**
  * TODO
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 
 public class INDArrayLocalCacheStoreProvider implements INDArrayStoreProvider {
@@ -49,6 +50,10 @@ public class INDArrayLocalCacheStoreProvider implements INDArrayStoreProvider {
 			.recordStats()
 			// 设置缓存的移除通知
 			.removalListener(new RemovalListener<String, Optional<INDArray>>() {
+				/**
+				 * <p>On removal.</p>
+				 * @param notification the notification
+				 */
 				@Override
 				public void onRemoval(RemovalNotification<String, Optional<INDArray>> notification) {
 					System.out.println(notification.getKey() + " was removed, cause is " + notification.getCause());
@@ -56,17 +61,35 @@ public class INDArrayLocalCacheStoreProvider implements INDArrayStoreProvider {
 			})
 			// build方法中可以指定CacheLoader，在缓存不存在时通过CacheLoader的实现自动加载缓存
 			.build(new CacheLoader<String, Optional<INDArray>>() {
+				/**
+				 * <p>Load.</p>
+				 * @param keySecret the key secret
+				 * @return the optional< i n d array>
+				 * @throws Exception if an error occurs
+				 */
 
 				@Override
 				public Optional<INDArray> load(String keySecret) throws Exception {
 					return Optional.fromNullable(null);
 				}
 			});
+	/**
+	 * <p>Store.</p>
+	 * @param group the group
+	 * @param memberId the member id
+	 * @param ndarray the ndarray
+	 */
 
 	@Override
 	public void store(String group, String memberId, INDArray ndarray) {
 		 INDARRAY_CACHES.put(String.join("-", group, memberId), Optional.of(ndarray));
 	}
+	/**
+	 * <p>Get.</p>
+	 * @param group the group
+	 * @param memberId the member id
+	 * @return the i n d array
+	 */
 
 	@Override
 	public INDArray get(String group, String memberId) {

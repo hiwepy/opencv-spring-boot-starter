@@ -17,6 +17,8 @@ package org.bytedeco.opencv.spring.boot.image;
 
 /**
  * 人脸位置信息类
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class Rect {
     /**
@@ -86,34 +88,42 @@ public class Rect {
         sb.append(")");
         return sb.toString();
     }
+    /** Gets the left. */
 
     public int getLeft() {
         return left;
     }
+    /** Sets the left. */
 
     public void setLeft(int left) {
         this.left = left;
     }
+    /** Gets the top. */
 
     public int getTop() {
         return top;
     }
+    /** Sets the top. */
 
     public void setTop(int top) {
         this.top = top;
     }
+    /** Gets the right. */
 
     public int getRight() {
         return right;
     }
+    /** Sets the right. */
 
     public void setRight(int right) {
         this.right = right;
     }
+    /** Gets the bottom. */
 
     public int getBottom() {
         return bottom;
     }
+    /** Sets the bottom. */
 
     public void setBottom(int bottom) {
         this.bottom = bottom;
